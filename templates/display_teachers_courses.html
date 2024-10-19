@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers Handling Courses</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary  navbar-light bg-dark ">
+		<div >
+		  
+		  <div class="" id="navbarNav">
+			<ul class="navbar-nav justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link active text-info" aria-current="page" href="http://localhost:5000/facultyhome">Home</a>
+				  </li>
+			  <li class="nav-item">
+				<a class="nav-link active text-info" aria-current="page" href="http://localhost:5000/facultyprofile"> Profile</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link text-info" href="http://localhost:5000/facultylogout">logout</a>
+			  </li>
+			
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+      <br>
+      <button  class="btn btn-primary"> <a href="/display_teachers_courses" class="text-warning"> Handling Courses</a> </button>
+      <button  class="btn btn-primary"> <a href="/teacher_students" class="text-warning"> Students</a> </button>
+<div class="container mt-5">
+    <h2 class="mb-4"> Handling Courses</h2>
+    
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Teacher Name</th>
+                <th>Course Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher_course in teacher_courses %}
+            <tr>
+                <td>{{ teacher_course[0] }}</td>
+                <td>{{ teacher_course[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

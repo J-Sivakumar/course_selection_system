@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Teachers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Manage Teachers</h2>
+    <form method="POST" action="{{ url_for('add_teacher') }}">
+        <div class="mb-3">
+            <label for="teacher_id" class="form-label">Teacher ID:</label>
+            <input type="text" class="form-control" name="teacher_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="teacher_name" class="form-label">Teacher Name:</label>
+            <input type="text" class="form-control" name="teacher_name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Teacher</button>
+    </form>
+    <hr>
+    <table class="table table-bordered mt-4">
+        <thead class="thead-light">
+            <tr>
+                <th>Teacher ID</th>
+                <th>Teacher Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher[0] }}</td>
+                <td>{{ teacher[1] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_teacher', teacher_id=teacher[0]) }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

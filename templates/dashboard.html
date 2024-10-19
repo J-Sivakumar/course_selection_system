@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mt-4">Admin Dashboard</h1>
+    <div class="text-center">
+        <a href="{{ url_for('manage_students') }}" class="btn btn-primary">Manage Students</a>
+        <a href="{{ url_for('manage_courses') }}" class="btn btn-primary">Manage Courses</a>
+        <a href="{{ url_for('manage_teachers') }}" class="btn btn-primary">Manage Teachers</a>
+        <a href="{{ url_for('adminlogout') }}" class="btn btn-primary">Logout</a>
+    </div>
+</div>
+</body>
+</html>

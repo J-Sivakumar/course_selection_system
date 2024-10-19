@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Manage Students</h2>
+    <form method="POST" action="{{ url_for('add_student') }}">
+        <div class="mb-3">
+            <label for="student_id" class="form-label">Student ID:</label>
+            <input type="text" class="form-control" name="student_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="student_name" class="form-label">Student Name:</label>
+            <input type="text" class="form-control" name="student_name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+    </form>
+    <hr>
+    <table class="table table-bordered mt-4">
+        <thead class="thead-light">
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_student', student_id=student[0]) }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

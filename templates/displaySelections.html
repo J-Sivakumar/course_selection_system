@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Courses</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary  navbar-light bg-dark ">
+		<div >
+		  
+		  <div class="" id="navbarNav">
+			<ul class="navbar-nav justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link active text-info" aria-current="page" href="http://localhost:5000/stdhome">Home</a>
+				  </li>
+			  <li class="nav-item">
+				<a class="nav-link active text-info" aria-current="page" href="http://localhost:5000/stdprofile"> Profile</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link text-info" href="http://localhost:5000/stdlogout">logout</a>
+			  </li>
+			
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+<div class="container mt-5">
+    <h2 class="mb-4">Selected Courses</h2>
+    
+    <table class="table table-dark table-striped-columns">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Course Name</th>
+                <th>Faculty Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for selection in selections %}
+            <tr>
+                <td>{{ selection[0] }}</td>
+                <td>{{ selection[1] }}</td>
+                <td>{{ selection[2] }}</td>
+                <td>{{ selection[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
