@@ -50,20 +50,20 @@ This is a web application built using Flask where students can select courses, p
 
 3. Login with your account.
    
-For admin login:
+### For admin login:
 
 admin id: "admin"
 
 password: "admin"
 
 
-For staff login:
+### For staff login:
 
 staff id: "staff1","staff2","staff3"...etc
 
 password: "staff1","staff2","staff3"...etc
 
-For student login:
+### For student login:
 
 staff id: "student1","student2","student3"...etc
 
