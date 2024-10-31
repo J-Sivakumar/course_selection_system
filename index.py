@@ -10,6 +10,9 @@ def home():
 @app.route('/stdlogin')
 def stdlogin():
     return render_template('stdlogin.html') 
+@app.errorhandler(500)
+def internal_error(error):
+    return "500 Internal Server Error", 500
 
 
 @app.route('/stdhome',methods=['POST','GET'])
