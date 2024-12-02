@@ -17,9 +17,44 @@
             <label for="course_name" class="form-label">Course Name:</label>
             <input type="text" class="form-control" name="course_name" required>
         </div>
+        <div class="mb-3">
+            <label for="semester" class="form-label">Semester:</label>
+            <select class="form-select" name="semester" id="semester" required>
+                <option value="" disabled selected>Select Semester</option> 
+                <option value="1">1st Semester</option>
+                <option value="2">2nd Semester</option>
+                <option value="3">3rd Semester</option>
+                <option value="4">4th Semester</option>
+                <option value="5">5th Semester</option>
+                <option value="6">6th Semester</option>
+                <option value="7">7th Semester</option>
+                <option value="8">8th Semester</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="department" class="form-label">Department:</label>
+            <select class="form-select" name="department" id="department" required>
+                <option value="" disabled selected>Select Department</option> 
+                <option value="Computer Science">Computer Science</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+    
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Add Course</button>
     </form>
     <hr>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="alert alert-dismissible fade show" role="alert">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+{% endwith %}
     <table class="table table-bordered mt-4">
         <thead class="thead-light">
             <tr>
