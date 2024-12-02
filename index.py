@@ -10,9 +10,6 @@ def home():
 @app.route('/stdlogin')
 def stdlogin():
     return render_template('stdlogin.html') 
-@app.errorhandler(500)
-def internal_error(error):
-    return "500 Internal Server Error", 500
 
 
 @app.route('/stdhome',methods=['POST','GET'])
@@ -414,23 +411,25 @@ def manage_students():
 def add_student():
     student_id = request.form['student_id']
     student_name = request.form['student_name']
-
+    department = request.form['department']
+    year = request.form['year']
+    semester = request.form['semester']
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO Students (student_id, student_name) VALUES (?, ?)', (student_id, student_name))
+    cursor.execute('INSERT INTO Students (student_id,password,department,year,semester, student_name) VALUES (?, ?,?, ?,?, ?)', (student_id, student_id, department, year,semester, student_name))
     conn.commit()
     conn.close()
-    flash('Student added successfully!')
+    flash('Student added successfully!','success')
     return redirect(url_for('manage_students'))
 
-@app.route('/delete_student', methods=['POST'])
-def delete_student():
+@app.route('/delete_student/<student_id>', methods=['POST'])
+def delete_student(student_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('DELETE FROM Students WHERE student_id = ?', (student_id,))
     conn.commit()
     conn.close()
-    flash('Student deleted successfully!')
+    flash('Student deleted successfully!','warning')
     return redirect(url_for('manage_students'))
 
 @app.route('/manage_courses')
@@ -446,23 +445,25 @@ def manage_courses():
 def add_course():
     course_id = request.form['course_id']
     course_name = request.form['course_name']
+    branch = request.form['department']
+    semester = request.form['semester']
 
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO Courses (course_id, course_name) VALUES (?, ?)', (course_id, course_name))
+    cursor.execute('INSERT INTO Courses (course_id, course_name, branch, semester) VALUES (?, ?, ?, ?)', (course_id, course_name, branch, semester))
     conn.commit()
     conn.close()
-    flash('Course added successfully!')
+    flash('Course added successfully!', 'success')
     return redirect(url_for('manage_courses'))
 
-@app.route('/delete_course', methods=['POST'])
-def delete_course():
+@app.route('/delete_course/<course_id>', methods=['POST'])
+def delete_course(course_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('DELETE FROM Courses WHERE course_id = ?', (course_id,))
     conn.commit()
     conn.close()
-    flash('Course deleted successfully!')
+    flash('Course deleted successfully!' , 'danger')
     return redirect(url_for('manage_courses'))
 
 # Manage Teachers
@@ -477,19 +478,26 @@ def manage_teachers():
 
 @app.route('/add_teacher', methods=['POST'])
 def add_teacher():
-    teacher_id = request.form['staff_id']
+    teacher_id = request.form['teacher_id']
     teacher_name = request.form['teacher_name']
+    qualification = request.form.get('qualification')
+    designation = request.form.get('designation')
+    department = request.form['department']
+    research_projects = request.form.get('research_projects', '')  # Empty if not provided
+    patents = request.form.get('patents', '')  # Empty if not provided
+    rating = float(request.form.get('rating'))  # Rating should be a float
+    years_of_experience = int(request.form.get('years_of_experience'))
 
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO Teachers (staff_id, faculty_name) VALUES (?, ?)', (teacher_id, teacher_name))
+    cursor.execute('INSERT INTO Teachers (staff_id,password, faculty_name,qualification, designation, research_projects, patents, rating, years_of_experience, department) VALUES (?, ?,?, ?,?, ?,?, ?,?, ?)', (teacher_id,teacher_id, teacher_name,qualification, designation, research_projects, patents, rating, years_of_experience, department))
     conn.commit()
     conn.close()
-    flash('Teacher added successfully!')
+    flash('Teacher added successfully!','success')
     return redirect(url_for('manage_teachers'))
 
-@app.route('/delete_teacher', methods=['POST'])
-def delete_teacher():
+@app.route('/delete_teacher/<teacher_id>', methods=['POST'])
+def delete_teacher(teacher_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('DELETE FROM Teachers WHERE staff_id = ?', (teacher_id,))
