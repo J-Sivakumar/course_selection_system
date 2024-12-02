@@ -17,14 +17,67 @@
             <label for="teacher_name" class="form-label">Teacher Name:</label>
             <input type="text" class="form-control" name="teacher_name" required>
         </div>
+        <div class="mb-3">
+            <label for="qualification" class="form-label">Qualification:</label>
+            <input type="text" class="form-control" name="qualification" id="qualification" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="designation" class="form-label">Designation:</label>
+            <input type="text" class="form-control" name="designation" id="designation" required>
+        </div>
+        <div class="mb-3">
+            <label for="department" class="form-label">Department:</label>
+            <select class="form-select" name="department" id="department" required>
+                <option value="" disabled selected>Select Department</option> 
+                <option value="Computer Science">Computer Science</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+    
+            </select>
+        </div>
+
+        
+        <div class="mb-3">
+            <label for="research_projects" class="form-label">Research Projects:</label>
+            <textarea class="form-control" name="research_projects" id="research_projects"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="patents" class="form-label">Patents:</label>
+            <textarea class="form-control" name="patents" id="patents"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating (0 to 5):</label>
+            <input type="number" class="form-control" name="rating" id="rating" step="0.1" min="0" max="5" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="years_of_experience" class="form-label">Years of Experience:</label>
+            <input type="number" class="form-control" name="years_of_experience" id="years_of_experience" required>
+        </div>
+
         <button type="submit" class="btn btn-primary">Add Teacher</button>
     </form>
     <hr>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="alert alert-dismissible fade show" role="alert">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+{% endwith %}
     <table class="table table-bordered mt-4">
         <thead class="thead-light">
             <tr>
                 <th>Teacher ID</th>
                 <th>Teacher Name</th>
+                <th>Department</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,7 +85,8 @@
             {% for teacher in teachers %}
             <tr>
                 <td>{{ teacher[0] }}</td>
-                <td>{{ teacher[1] }}</td>
+                <td>{{ teacher[2] }}</td>
+                <td>{{ teacher[9] }}</td>
                 <td>
                     <form method="POST" action="{{ url_for('delete_teacher', teacher_id=teacher[0]) }}">
                         <button type="submit" class="btn btn-danger">Delete</button>
